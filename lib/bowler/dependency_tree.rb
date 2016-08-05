@@ -1,3 +1,5 @@
+require 'graphviz'
+
 module Bowler
 
   class DependencyTree
@@ -22,6 +24,21 @@ module Bowler
 
         [dependencies_for(@definition.tree[p], visited + [p]), p]
       }.flatten.compact.uniq
+    end
+
+    def graph
+      g = GraphViz.new(:G, :type => :digraph)
+
+      @definition.processes.each do |process|
+        g.add_nodes(process.to_s)
+
+        dependencies = tree.dependencies_for([process]) - [process]
+        dependencies.each do |dependency|
+          g.add_edges(process.to_s, dependency.to_s)
+        end
+      end
+
+      g.to_s
     end
 
   end

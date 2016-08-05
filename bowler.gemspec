@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.require_paths      = ["lib"]
 
   s.add_dependency 'foreman', '>= 0.35.0'
+  s.add_dependency 'ruby-graphviz', '~> 1.2.2'
 
   s.add_development_dependency 'rake', '~> 0.9.2.2'
   s.add_development_dependency 'rspec-core', '~> 2.14.7'
